@@ -1,0 +1,71 @@
+{%extends 'layout.html'%}
+{%block content%}
+<div class="container">
+    <div class="container col-md-3 padded-t-15" id="article-nav">
+        <a href="/main"><h1 class="text-danger padded-t-10 " >MAIN</h1></a>
+        <a href="/article?articleid=5965eee0698ad818a472efd5"><h1 class="text-danger padded-t-10">BILLBOARD</h1></a>
+{%for article in articles %}
+        <a href="/article?articleid={{article.id}}"><h4 class="padded-l-15 padded-t-10" data-title="{{article.title}}">{{article.title}}</h4></a>
+        {%endfor%}
+        <a href="/about"><h1 class="text-danger padded-t-10">ABOUT</h1></a>
+        <a href="/contact"><h1 class="text-danger padded-t-10">CONTACT<span class="glyphicon glyphicon-play float-right text-shake"></span></h1></a>
+    </div>
+    <div class="container col-md-9 padded-t-15" id="article-content">
+        <div class="padded-b-5 padded-l-15" style=" border-left: 2px solid #e2e2e2">
+            <div class="jumbotron" id="contact" style="margin-top: 20px;margin-bottom: 10px;">
+                <div class="row text-center">
+                    <h1 class="m-welcome-title">CONTACT US</h1>
+                </div>
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Your Name</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" placeholder="Please enter your Name" name="name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Your Phone</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" placeholder="Please enter your Phone" name="phone">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Your Email</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" placeholder="Please enter your Email" name="email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Message</label>
+                        <div class="col-md-10">
+                            <textarea class="form-control" rows="6" placeholder="Please enter your Message" name="message"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <button type="button" class="btn btn-default btn-lg"  data-toggle="modal" data-target="#myModal2">SEND</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel2">Feedback</h4>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}

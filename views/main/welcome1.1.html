@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome - HERE V R 0769</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link href="/public/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/public/css/style.css" rel="stylesheet" type="text/css">
+    <link rel="Shortcut Icon" href="/public/image/favicon.ico" type="image/x-icon" />
+</head>
+<body id="page-top">
+<!--导航-->
+<div class="container-fluid" >
+    <div class="row">
+        <nav class="navbar navbar-default m-nav-bg navbar-fixed-top navbar-inverse" >
+            <div class="col-md-6">
+                <div class="navbar-header">
+                    <div class="navbar-brand m-text-white" href="/">MUSIC <span class="glyphicon glyphicon-forward"></span> </div>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-header hidden">
+                        <li><a class="navbar-brand page-scroll" href="#page-top" >TOP</a></li>
+                        <li><a class="navbar-brand page-scroll" href="/main" >MAIN</a></li>
+                        <li><a class="navbar-brand page-scroll" href="#category">CATEGORY</a></li>
+                        <li><a class="navbar-brand page-scroll" href="#history" >HISTORY</a></li>
+                        <li><a class="navbar-brand page-scroll" href="#contact" >CONTANT US</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                {% if userInfo._id %}
+                <div class="navbar-header navbar-right padded-r-10">
+                {% if userInfo.isAdmin %}
+
+                    <div class="navbar-brand m-text-white " ><span>{{userInfo.username}}</span>,<span><a href="/admin">CLICK To Admin</a></span>!</div>
+
+                    {% else %}
+
+
+                    <div class="navbar-brand m-text-white " ><span>{{userInfo.username}}</span>,welcome to my blog</div>
+
+                    {% endif %}
+                    <form class="navbar-form navbar-right ">
+                        <button type="button" class="btn btn-default" id="logout">Logout</button>
+                    </form>
+                </div>
+                {% else %}
+                <form class="navbar-form navbar-right" style="margin-right: 5px" id="loginBox">
+                    <button type="button" class="btn btn-danger hidden text-gbb" id="loginMsg" style="cursor: default"></button>
+                    <button type="button" class="btn btn-danger hidden" id="tip"><span class="text-gbb"  style="cursor: default">HERE!</span> </button>
+                    <div class="form-group ">
+                        <input type="text" class="form-control"  name="username" placeholder="Username">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control"  name="password" placeholder="Password">
+                    </div>
+                    <button type="button" class="btn btn-default" id="loginBtn">Login</button>
+                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">Sign </button>
+                </form>
+                {% endif %}
+            </div>
+        </nav>
+    </div>
+</div>
+<div class="clearfix"></div>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Sign in</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="registerBox">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Username</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="username" placeholder="Username">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Password</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control"  name="password" placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Password</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" name="repassword" placeholder="rePassword">
+                        </div>
+                    </div>
+                    <div class="form-group">
+
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <label>
+                                <p id="signMsg"></p>
+                            </label>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="sign">Sign</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="myCarousel" class="carousel slide">
+    <!-- 轮播（Carousel）指标 -->
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <!-- <li data-target="#myCarousel" data-slide-to="2"></li>-->
+    </ol>
+    <!-- 轮播（Carousel）项目 -->
+    <div class="carousel-inner">
+        <div class="item active img-responsive">
+            <img  class="img-responsive" src="public/image/14.jpg" width="100%" alt="First slide">
+        </div>
+        <div class="item img-responsive">
+            <img  class="img-responsive" src="public/image/15.jpg" alt="Second slide">
+        </div>
+        <!-- <div class="item">
+            <img src="public/image/11.jpg" alt="Third slide">
+        </div>-->
+    </div>
+    <!-- 轮播（Carousel）导航 -->
+    <a class="carousel-control left" href="#myCarousel" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+    </a>
+    <a class="carousel-control right" href="#myCarousel" data-slide="next" alret="left">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
+</div>
+
+
+<section class="m-welcome-bolck" id="category">
+    <div class="container">
+        <div class="row text-center">
+            <h1 class="m-welcome-title"><strong>Category</strong></h1>
+            <div class="col-md-4 ">
+                <a href="/">
+                    <div class="text-center thumbnail">
+                        <img src="public/image/rock.png" class="img-circle img-responsive">
+                        <div class="caption">
+                            <h3 >ROCK</h3>
+                            <p>A genre of popular music that originated as "rock and roll" in
+                                the United States in the early 1950s, and developed into a range
+                                of different styles in the 1960s and later, particularly in the United
+                                Kingdom and the United States.
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="/">
+                    <div class="text-center thumbnail">
+                        <img src="public/image/rap.jpg" class="img-circle img-responsive">
+                        <div class="caption">
+                            <h3 >RAP</h3>
+                            <p>A genre of music, now widely considered to
+                                be a subgenre of Hip hop music, in which a
+                                performer speaks syncopated rhyming lyrics,
+                                often, but not always, over a musical rhythm
+                                and/or melody accompaniment.
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="/">
+                    <div class="text-center thumbnail">
+                        <img src="public/image/electro.jpg" class="img-circle img-responsive">
+                        <div class="caption">
+                            <h3>ELECTRO</h3>
+                            <p>A genre of electronic music which originated in the early 1980s,
+                                Electronic dance music (also known as EDM, dance music,
+                                club music, or simply dance) is a broad range of percussive
+                                electronic music genres.
+                            </p>
+                        </div>
+                    </div></a>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="m-welcome-bolck m-bg-dark" id="history">
+    <div class="container ">
+        <div class="row text-center">
+            <h1 class="m-welcome-title"><strong>History</strong></h1>
+            <div class="col-md-10 col-md-offset-1 m-welcome-title">
+                <div class="col-md-6 m-history-content">
+                    <h3>Ancient Egypt</h3>
+                    <p>Musicians of Amun, Tomb of Nakht, 18th Dynasty, Western Thebes</p>
+                </div>
+                <div class="col-md-6">
+                    <img src="public/image/h1.jpg" class=" img-thumbnail img-responsive center-block">
+                </div>
+            </div>
+            <div class="col-md-10 col-md-offset-1 m-welcome-title">
+                <div class="col-md-6 ">
+                    <img src="public/image/h2.jpg" class="img-thumbnail img-responsive center-block">
+                </div>
+                <div class="col-md-6 m-history-content">
+                    <h3>References in the Bible</h3>
+                    <p>"David with his harp" Paris Psalter,
+                        c. 960, Constantinople
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-10 col-md-offset-1 m-welcome-title">
+                <div class="col-md-6 m-history-content">
+                    <h3>Classicism</h3>
+                    <p>Wolfgang Amadeus Mozart (seated at the keyboard) was a child prodigy virtuoso performer
+                        on the piano and violin.
+                        Even before he became a celebrated composer, he was widely known as a gifted performer and improviser.
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <img src="public/image/h3.jpg" class="img-thumbnail img-responsive center-block">
+                </div>
+            </div>
+            <div class="col-md-10 col-md-offset-1 m-welcome-title">
+                <div class="col-md-6">
+                    <img src="public/image/h4.jpg" class="img-thumbnail img-responsive center-block">
+                </div>
+                <div class="col-md-6 m-history-content">
+                    <h3>20th- and 21st-century music</h3>
+                    <p>A jazz group consisting of double bassist Reggie Workman, tenor saxophone player Pharoah Sanders, and drummer Idris Muhammad, performing in 1978</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+<section class="m-welcome-bolck m-bg-dark" id="contact">
+    <div class="container ">
+        <div class="row text-center">
+            <h1 class="m-welcome-title"><strong>CONTACT US</strong></h1>
+        </div>
+        <!--<div class="col-md-12">
+            <div class="col-md-2"></div>
+            <div class=" col-md-10 alert alert-danger alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert"
+                        aria-hidden="true">
+                    &times;
+                </button>
+                错误！请进行一些更改。
+            </div>
+        </div>-->
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label class="col-md-2 control-label">Your Name</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" placeholder="Please enter your Name" name="name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">Your Phone</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" placeholder="Please enter your Phone" name="phone">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">Your Email</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" placeholder="Please enter your Email" name="email">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">Message</label>
+                <div class="col-md-10">
+                    <textarea class="form-control" rows="6" placeholder="Please enter your Message" name="message"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <button type="button" class="btn btn-default btn-lg"  data-toggle="modal" data-target="#myModal2">SEND</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+<!-- Modal -->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel2">Feedback</h4>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="m-welcome-bolck " id="footer"  style="background-color: #FFF68F">
+    <div class="container ">
+        <div class="row text-center">
+            <h1 class="m-welcome-title"><strong>END</strong></h1>
+            <p class="m-linethrough">©1995-2004 Macromedia, Inc. All rights reserved.</p>
+            <p class="m-linethrough">©2004 Microsoft Corporation. All rights reserved.</p>
+        </div>
+</section>
+
+<script src="/public/js/jquery.js"></script>
+<script src="/public/js/index.js"></script>
+<script src="/public/js/bootstrap.min.js"></script>
+<script src="/public/js/welcome1.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+</body>
+
+</html>

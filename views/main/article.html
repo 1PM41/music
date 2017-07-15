@@ -1,0 +1,26 @@
+{%extends 'layout.html'%}
+{%block content%}
+
+<div class="container">
+    <div class="container col-md-3 padded-t-15" id="article-nav">
+        <a href="/main"><h1 class="text-danger padded-t-10 " >MAIN</h1></a>
+        <a href="/article?articleid=5965eee0698ad818a472efd5"><h1 class="text-danger padded-t-10">BILLBOARD</h1></a>
+        {% for article in articles %}
+        <a href="/article?articleid={{article.id}}"><h4 class="padded-l-15 padded-t-10" data-title="{{article.title}}">{{article.title}}</h4></a>
+        {%endfor%}
+        <a href="/about"><h1 class="text-danger padded-t-10">ABOUT</h1></a>
+        <a href="/contact"><h1 class="text-danger padded-t-10">CONTACT</h1></a>
+    </div>
+    <div class="container col-md-9 padded-t-15" id="article-content">
+        <div class="padded-b-5 padded-l-15" style=" border-left: 2px solid #e2e2e2">
+
+            <h1 class="text-danger " data-title="{{article.title}}">{{article.title}}</h1>
+            <div class=" text-left padded-l-10 padded-r-10">
+                {% autoescape false %}{{article.content}}{% endautoescape %}
+            </div>
+
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+    {%endblock%}

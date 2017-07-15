@@ -1,0 +1,139 @@
+{%extends 'layout.html'%}
+{%block content%}
+<div class="container padded-t-15">
+
+    <!--<div class="col-md-3">
+        <div class="panel panel-default">
+            <div class="panel-heading"><a href="/main">Billboard</a></div>
+            <div class="panel-body">
+                <ol>
+                    <li role="presentation" class="active">
+
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading"><a href="/main">NEWS</a></div>
+            <div class="panel-body">
+                <ol>
+                    <li role="presentation" class="active">
+
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>-->
+    <div class="col-md-12">
+        <div class="panel panel-default ">
+            <div class="media">
+                <div class="media-left">
+                    <a href="#">
+                        <img class="media-object " src="public/image/billboard.jpg" alt="...">
+                    </a>
+                </div>
+                <div class="media-body" id="ranking">
+                    <h1 class="media-heading text-center">THE HOT 5</h1>
+                    <ul class="list-group col-md-12" style="margin-bottom: 0px;">
+                        {% for ranking in rankings %}
+                        {% if ranking.ranking != ''%}
+                        <li class="list-group-item  text-gbb " style="font-size: large">
+                            {{ranking.ranking}} {{ranking.title}}
+                            <span class= "float-right glyphicon glyphicon-chevron-right"></span>
+                            <div class="media hidden">
+                                <div class="media-body padded-l-15">
+
+                                        <h4 class="text-danger"><span class="col-md-6">LAST WEEK</span> <span>{{ranking.last}}</span></h4>
+                                        <h4 class="text-danger"><span class="col-md-6">PEAK POSITION</span> <span>{{ranking.peak}}</span></h4>
+                                        <h4 class="text-danger"><span class="col-md-6">WKS ON CHART </span><span>{{ranking.weeks}}</span></h4>
+                                </div>
+                                <div class="media-right">
+                                    <a href="#">
+                                        <img class="media-object " src="{{ranking.thumbnails}}" width="90px;" height="90px;">
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                        {%endif%}
+                        {%endfor%}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+
+        <div class="panel panel-default ">
+            <!-- Default panel contents -->
+            <div class="col-md-12" style="margin-bottom: 20px">
+                <ul class="nav navbar-nav text-gbb" id="cateList">
+                    <li><input hidden value=""><a href="/main" aria-controls="home">ALL</a></li>
+                    {% for category in categories %}
+                    <li><input hidden value="{{category.id}}"><a href="/main?category={{category.id}}">{{category.name}}</a></li>
+                    {%endfor%}
+                    <li class="dropdown text-danger">
+                        <a href="#" class="dropdown-toggle text-danger" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">SORT<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/main?category={{category}}&sort=news">NEW</a></li>
+                            <li><a href="/main?category={{category}}&sort=views">VIEWS</a></li>
+                            <li><a href="/main?category={{category}}&sort=likes">LIKES</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="panel-body">
+                <div class="row" id="list">
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="home">
+                            {% for content in contents %}
+                            <div class="col-sm-6 col-md-3" >
+                                <div class="thumbnail">
+                                    <div class="block-header__tag">{{content.category.name}}</div>
+                                    <img src="{{content.thumbnails}}" alt="{{content.title}}">
+                                    <div class="caption">
+                                        <h3 class="ellipsis-1">{{content.title}}</h3>
+                                        <p class="ellipsis-1">Artist：{{content.artist}} <br> Time：{{content.addTime|date('Y-m-d H:i:s',-8*60)}}<br>Views：{{content.views}}<br>
+                                            <input type="hidden" value="{{content.id}}">
+                                            <span class=" float-right padded-r-15 label label-danger cursor-pointer"><span class="glyphicon glyphicon-thumbs-up padded-5"></span>{{content.likes}}</span>
+                                            <input type="hidden" value="{{content.likes}}">
+                                        </p>
+                                        <a href="/view?contentid={{content.id}}" class="text-center">
+                                            <h4 class="col-md-12 bg-primary  padded-5">DETAIL</h4>
+                                        </a>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            {%endfor%}
+
+                        </div>
+                    </div>
+                </div>
+                <ul class="pager">
+                    {%if page <= 1%}
+                    <li class="previous"><a class="text-gbb" href="javascript:;">None</a></li>
+                    {%else%}
+                    <li class="previous"><a class="text-gbb" href="/main?category={{category}}&page={{page-1}}"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Previous</a></li>
+                    {%endif%}
+
+                    {%if pages >0 %}
+                    <li><span class="text-gbb">{{page}}/{{pages}}</span></li>
+                    {%else%}
+                    <li><h4 class="text-gbb">NONE</h4></li>
+                    {%endif%}
+
+
+                    {%if page >= pages%}
+                    <li class="next"><a class="text-gbb" href="javascript:;">None</a></li>
+                    {%else%}
+                    <li class="next"><a class="text-gbb" href="/main?category={{category}}&page={{page+1}}">Next<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a></li>
+                    {%endif%}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}

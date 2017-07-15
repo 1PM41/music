@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Main - - HERE V R 0769</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link href="/public/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/public/css/style.css" rel="stylesheet" type="text/css">
+    <link rel="Shortcut Icon" href="/public/image/favicon.ico" type="image/x-icon" />
+    <script src="/public/js/jquery.js"></script>
+    <script src="/public/js/index.js"></script>
+    <script src="/public/js/contact.js"></script>
+
+    <script src="/public/js/bootstrap.min.js"></script>
+
+</head>
+<body class="m-bg-dark">
+
+<!--导航-->
+<div class="container-fluid" style="height: 51px">
+    <div class="row">
+        <nav class="navbar navbar-default m-nav-bg navbar-fixed-top navbar-inverse" >
+            <div class="col-md-6">
+                <div class="navbar-header">
+                    <a class="navbar-brand m-text-white" href="/">MUSIC <span class="glyphicon glyphicon-forward"></span> </a>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-header hidden">
+                        <li><a class="navbar-brand page-scroll" href="/main" >MAIN</a></li>
+                        <li role="presentation" class="dropdown">
+                            <a class="dropdown-toggle navbar-brand page-scroll" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                BILLBOARD <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                {% for article in articles%}
+                                <li role="presentation" class="text-gbb"><a href="/article?articleid={{article.id}}">{{article.title}}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                        <li><a class="navbar-brand page-scroll" href="/about" >ABOUT</a></li>
+                        <li><a class="navbar-brand page-scroll" href="/contact" >CONTANT US</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                {% if userInfo._id %}
+                <div class="navbar-header navbar-right padded-r-10">
+                    {% if userInfo.isAdmin %}
+
+                    <div class="navbar-brand m-text-white " ><span>{{userInfo.username}}</span>,<span><a href="/admin">CLICK To Admin</a></span>!</div>
+
+                    {% else %}
+
+
+                    <div class="navbar-brand m-text-white " ><span>{{userInfo.username}}</span>,welcome to my blog</div>
+
+                    {% endif %}
+                    <form class="navbar-form navbar-right ">
+                        <button type="button" class="btn btn-default" id="logout">Logout</button>
+                    </form>
+                </div>
+                {% else %}
+                <form class="navbar-form navbar-right" style="margin-right: 5px" id="loginBox">
+                    <button type="button" class="btn btn-danger hidden text-gbb" id="loginMsg" style="cursor: default"></button>
+                    <button type="button" class="btn btn-danger hidden" id="tip"><span class="text-gbb"  style="cursor: default">HERE!</span> </button>
+                    <div class="form-group ">
+                        <input type="text" class="form-control"  name="username" placeholder="Username">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control"  name="password" placeholder="Password">
+                    </div>
+                    <button type="button" class="btn btn-default" id="loginBtn">Login</button>
+                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">Sign </button>
+                </form>
+                {% endif %}
+            </div>
+        </nav>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Sign in</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="registerBox">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Username</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="username" placeholder="Username">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Password</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control"  name="password" placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Password</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" name="repassword" placeholder="rePassword">
+                        </div>
+                    </div>
+                    <div class="form-group">
+
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <label>
+                                <p id="signMsg"></p>
+                            </label>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="sign">Sign</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--博文-->
+
+{%block content%}{%endblock%}
+
+
+<!--右侧登陆
+<div class="container col-md-3" >
+    <div class="col-md-12 " style="background-color: #ebccd1;height: 30px;text-align: center" id=""></div>
+    {% if userInfo._id %}
+    {% if userInfo.isAdmin %}
+    <h1><span>{{userInfo.username}}</span>,<span><a href="/admin">进入管理</a></span>!</h1>
+    {% else %}
+    <h1><span>{{userInfo.username}}</span>,Welcome to my blog!!</h1>
+    {% endif %}
+        <br>
+
+
+
+
+    {% else %}
+        <div class="col-md-12 " style="background-color: #9acfea">
+            <h3>注册</h3>
+            <form class="form-horizontal" id="registerBox">
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Username</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="inputEmail3" name="username" placeholder="Username">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" id="inputPassword3" name="password" placeholder="Password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" id="inputPassword3"  name="repassword" placeholder="rePassword">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="button" class="btn btn-default">Sign in</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-md-12" style="background-color: #f8efc0  ">
+            <h3>登陆</h3>
+            <form class="form-horizontal" >
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Username</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="inputEmail3" name="username" placeholder="Username">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" id="inputPassword3" name="password" placeholder="Password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-2 control-label"></label>
+                    <div class="col-sm-10">
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="button" class="btn btn-default">Login</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    {% endif %}
+</div>-->
+
+<script src="/public/js/article.js"></script>
+</body>
+</html>

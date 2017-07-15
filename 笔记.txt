@@ -1,0 +1,31 @@
+歌曲封面200*200
+
+article:<h5 style="line-height:20px"> &nbsp &nbsp </h5>
+
+百度云 07691PM41！
+阿里云 ZZZ007zzz!           远程链接密码 196055
+
+http://120.77.38.99:8081/
+
+admin admin0769
+
+添加表结构（schemas）→新建一个模型（models）→后端引入（var XXX = require）
+
+db数据库连接：
+cd Program Files\MongoDB\Server\3.2\bin
+mongod --dbpath=F:\GDI\untitled\db --port=27017
+mongod --dbpath=F:\GDI\music\db --port=27017
+
+//关联字段 - 内容分类的id
+    category:{
+        //类型
+        type:mongoose.Schema.Types.ObjectId,
+        //引用
+        ref: 'Category'
+    },
+要引用的对象使用populate('category')方法引用
+
+1.第三方包一个个加
+
+2.数据库无法连接需删除db里的XXXX-lock
+
